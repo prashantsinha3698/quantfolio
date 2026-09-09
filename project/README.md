@@ -1,4 +1,4 @@
-# Financial Portfolio Performance & Risk Analytics Platform
+# Quantfolio — Financial Portfolio Analytics
 
 An institutional-grade quantitative portfolio performance, risk analytics, mathematical optimization, and rebalancing platform built with a Python FastAPI analytics engine and a React / TypeScript / Tailwind CSS / Plotly analytical dashboard.
 
