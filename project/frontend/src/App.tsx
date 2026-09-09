@@ -47,7 +47,8 @@ export function App() {
       setSelectedPresetKey(defaultKey);
       setCurrentPortfolio(loadedPresets[defaultKey]);
     } catch (err: any) {
-      setErrorMessage(`Failed to connect to backend analytics service at ${API_BASE_URL}. If your backend is hosted on Render free tier, please allow up to 45 seconds for cold start.`);
+      const detail = err?.message ? ` (${err.message})` : '';
+      setErrorMessage(`Failed to connect to backend analytics service at ${API_BASE_URL}${detail}. If your backend is hosted on Render free tier, please allow up to 45 seconds for cold start.`);
       setIsLoading(false);
     }
   }, []);
