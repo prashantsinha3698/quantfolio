@@ -1,0 +1,54 @@
+# Reference Specification Files
+idea-design.md
+*/idea-design.md
+
+# Virtual Environments
+.venv/
+*/.venv/
+env/
+venv/
+ENV/
+
+# Node Dependencies & Build Artifacts
+node_modules/
+*/node_modules/
+frontend/dist/
+*/dist/
+.vite/
+*/.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python Artifacts & Cache
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+*/.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+build/
+
+# Market Data Cache & Temporary Data
+data/cache/*
+!data/cache/.gitkeep
+*/data/cache/*
+!*/data/cache/.gitkeep
+*.parquet
+
+# Environment Variables & Secrets
+.env
+*/.env
+.env.local
+*.pem
+*.key
+
+# IDE & Operating System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
