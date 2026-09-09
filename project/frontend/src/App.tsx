@@ -37,21 +37,24 @@ export function App() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // Load Presets on Mount
-  useEffect(() => {
-    async function init() {
-      try {
-        const loadedPresets = await portfolioApi.getPresets();
-        setPresets(loadedPresets);
-        const defaultKey = Object.keys(loadedPresets)[0] || 'balanced_growth';
-        setSelectedPresetKey(defaultKey);
-        setCurrentPortfolio(loadedPresets[defaultKey]);
-      } catch (err: any) {
-        setErrorMessage(`Failed to connect to backend analytics service at ${API_BASE_URL}. If your backend is hosted on Render free tier, please allow up to 45 seconds for cold start.`);
-        setIsLoading(false);
-      }
+  const initApp = useCallback(async () => {
+    setIsLoading(true);
+    setErrorMessage(null);
+    try {
+      const loadedPresets = await portfolioApi.getPresets();
+      setPresets(loadedPresets);
+      const defaultKey = Object.keys(loadedPresets)[0] || 'balanced_growth';
+      setSelectedPresetKey(defaultKey);
+      setCurrentPortfolio(loadedPresets[defaultKey]);
+    } catch (err: any) {
+      setErrorMessage(`Failed to connect to backend analytics service at ${API_BASE_URL}. If your backend is hosted on Render free tier, please allow up to 45 seconds for cold start.`);
+      setIsLoading(false);
     }
-    init();
   }, []);
+
+  useEffect(() => {
+    initApp();
+  }, [initApp]);
 
   // Fetch all analytics for the current portfolio
   const fetchAllAnalytics = useCallback(async (portfolio: PortfolioRequest) => {
@@ -102,6 +105,8 @@ export function App() {
   const handleRefresh = () => {
     if (currentPortfolio) {
       fetchAllAnalytics(currentPortfolio);
+    } else {
+      initApp();
     }
   };
 
