@@ -17,7 +17,7 @@ import type {
   RebalanceResponse,
   RiskResponse,
 } from './types';
-import { portfolioApi } from './services/api';
+import { portfolioApi, API_BASE_URL } from './services/api';
 import { AlertCircle, RefreshCw } from 'lucide-react';
 
 export function App() {
@@ -46,7 +46,7 @@ export function App() {
         setSelectedPresetKey(defaultKey);
         setCurrentPortfolio(loadedPresets[defaultKey]);
       } catch (err: any) {
-        setErrorMessage('Failed to connect to backend analytics service at http://127.0.0.1:8000.');
+        setErrorMessage(`Failed to connect to backend analytics service at ${API_BASE_URL}. If your backend is hosted on Render free tier, please allow up to 45 seconds for cold start.`);
         setIsLoading(false);
       }
     }
